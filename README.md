@@ -181,6 +181,10 @@ The APK is `build/airplay-bridge.apk`.
 - **A new aircast release breaks something:** a new `airshim: syscall N blocked by seccomp` line in the log means a syscall the shim does not rewrite yet, so it gets ENOSYS. Look up N in the syscall table for your architecture and add a rewrite in `jni/airshim.c` if it breaks something.
 - **Testing from a PC without an iPhone:** pyatv's `atvremote ... stream_file=` works if its `/info` and `/feedback` requests are stubbed out, because aircast answers them with 501 without CSeq.
 
+## Contributing
+
+Feel free to fork the project and send pull requests. Bug reports, device reports ("works on my X") and ideas are welcome as [issues](https://github.com/Picazsoo/airplay-cast-bridge/issues). For a bug, please include the device model, Android TV version and the output of `adb logcat -s AirBridge AirBridgeOut` if you can.
+
 ## License
 
 - **This project:** MIT, see [LICENSE](LICENSE).
