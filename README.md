@@ -78,7 +78,7 @@ The right side of the screen has:
 - **Speakers shown on iPhone/Mac:** one checkbox for each Cast device found on the network.
   - Unchecked speakers are hidden from AirPlay.
   - "✓ offered" means the speaker is currently available. "(not online)" means it is off or unreachable.
-  - The TV box's own Cast receiver is hidden by default, because it would only loop back to the box.
+  - The TV box's own Cast receiver is hidden by default: casting to it opens a full-screen Cast player on the TV and stops whatever is playing. Turn it on if the box feeds your sound system, for example a soundbar or AV receiver over HDMI. The choice sticks.
   - **Rename** sets the name shown on iPhones and Macs. Leave it empty or press Reset to use the Cast name.
 - **Log:** the latest lines from the bridge and aircast, newest first.
 
