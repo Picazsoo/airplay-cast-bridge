@@ -6,6 +6,8 @@ AirPlay Bridge lets iPhones, iPads and Macs play audio to your Chromecast speake
 - **What you see:** every Chromecast Audio, Cast-enabled speaker, Nest speaker and Cast speaker group on your network shows up as an AirPlay speaker with the same name.
 - **No root and no server:** it is an ordinary app. It starts with the box and keeps running while the TV is in standby.
 
+![The app on the TV: settings on the left, Cast speakers shown on iPhone/Mac on the right](docs/screenshots/tv-main.png)
+
 ## Requirements
 
 - An Android TV or Google TV device with Android 9 or newer, connected to the same network as the Cast speakers.
@@ -55,6 +57,8 @@ Nothing needs to stay open on the TV.
 
 ## The app screen
 
+![Lower part of the app: web settings address with QR code, web PIN and battery optimisation](docs/screenshots/tv-settings.png)
+
 | Left column | |
 |---|---|
 | Start / Stop bridge | Stops or starts the bridge. Stopped stays stopped across reboots. |
@@ -87,6 +91,8 @@ The right side of the screen has:
 ## Web settings page
 
 The same settings can be changed from any browser on your network, at `http://<tv-ip>:8099`. The page is off by default: the app asks once on first start whether to turn it on, and the *Web settings* button switches it later. While it is on, the TV screen shows the address and a QR code to scan with a phone.
+
+<img src="docs/screenshots/web.png" alt="Web settings page: status and log, settings, speakers and the config.xml editor" width="640">
 
 The page has:
 
