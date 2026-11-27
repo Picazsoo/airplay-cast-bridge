@@ -1,9 +1,14 @@
 # Changelog
 
-## 1.1.0
+## 1.1.1
 
 First public release. App ID `io.github.picazsoo.airplaybridge`; the versions below were private
 test builds.
+
+- The web settings page is off by default. On first start the app asks once whether to turn it
+  on; the Web settings button switches it later. Installs that already had it keep it on.
+
+## 1.1.0
 
 - Battery optimisation can be turned off without a PC, through Shizuku. The app points to the
   Android TV fork of Shizuku (thedjchi) with a QR code, asks for Shizuku permission, and then sets

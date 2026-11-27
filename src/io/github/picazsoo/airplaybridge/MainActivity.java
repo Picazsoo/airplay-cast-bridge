@@ -119,6 +119,27 @@ public class MainActivity extends Activity {
             requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
         if (Prefs.enabled(this)) BridgeService.start(this);
         toggle.requestFocus();
+        if (!Prefs.webAsked(this)) askWeb();
+    }
+
+    /** First start: ask once whether to turn on the web settings page (off by default). */
+    private void askWeb() {
+        new AlertDialog.Builder(this)
+            .setTitle("Change settings from your phone or PC too?")
+            .setMessage("AirPlay Bridge can show a settings page in any browser on your home network, "
+                + "protected by a PIN shown here on the TV. Everything can also be set on this screen. "
+                + "You can change this later with the Web settings button.")
+            .setPositiveButton("Turn on", (d, w) -> setWeb(true))
+            .setNegativeButton("Not now", (d, w) -> setWeb(false))
+            .setOnCancelListener(d -> setWeb(false))
+            .show();
+    }
+
+    private void setWeb(boolean on) {
+        Prefs.setWebEnabled(this, on);
+        if (BridgeService.instance != null) BridgeService.instance.updateWeb();
+        refresh();
+        if (on) webBtn.requestFocus();
     }
 
     @Override protected void onResume() { super.onResume(); tick(); }
@@ -135,7 +156,8 @@ public class MainActivity extends Activity {
         webBtn.setText(Prefs.webEnabled(this)
             ? "Web settings: on  http://" + BridgeService.boundIp + ":" + WebServer.PORT
             : "Web settings: off");
-        pinBtn.setText(Prefs.webPinOn(this) ? "Web PIN: " + Prefs.webPin(this) : "Web PIN: off (no password)");
+        pinBtn.setText(!Prefs.webPinOn(this) ? "Web PIN: off (no password)"
+            : Prefs.webEnabled(this) ? "Web PIN: " + Prefs.webPin(this) : "Web PIN: on");
         String url = Prefs.webEnabled(this) && BridgeService.boundIp != null
             ? "http://" + BridgeService.boundIp + ":" + WebServer.PORT : null;
         if (url == null) { qrView.setVisibility(View.GONE); qrUrl = null; }

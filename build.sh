@@ -13,7 +13,7 @@ if [ -f keystore.properties ] && [ -z "${KEYSTORE:-}" ]; then . ./keystore.prope
 # javac classpath separator (Windows javac wants ";" even under Git Bash)
 case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) CPSEP=";" ;; *) CPSEP=":" ;; esac
 CP=$ANDROID_JAR; for j in libs/*.jar; do CP=$CP$CPSEP$j; done   # libs/: Shizuku API (MIT)
-VC=${VERSION_CODE:-11}; VN=${VERSION_NAME:-1.1.0}
+VC=${VERSION_CODE:-12}; VN=${VERSION_NAME:-1.1.1}
 rm -rf build && mkdir -p build/gen build/classes build/dex
 tool "$BT/aapt" package -f -m -J build/gen -M AndroidManifest.xml -S res -I "$ANDROID_JAR" \
   --min-sdk-version 28 --target-sdk-version 34 --version-code "$VC" --version-name "$VN" \

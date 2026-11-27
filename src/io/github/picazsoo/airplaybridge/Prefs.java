@@ -16,8 +16,16 @@ final class Prefs {
     static SharedPreferences p(Context c) {
         // Device-protected storage, readable early in boot.
         Context dp = c.createDeviceProtectedStorageContext();
-        return dp.getSharedPreferences("bridge", Context.MODE_PRIVATE);
+        SharedPreferences sp = dp.getSharedPreferences("bridge", Context.MODE_PRIVATE);
+        if (!migrated) {
+            migrated = true;
+            // Before 1.1.1 the web page was on by default (and created a PIN): keep it on there.
+            if (!sp.contains("web_enabled") && sp.contains("web_pin"))
+                sp.edit().putBoolean("web_enabled", true).putBoolean("web_asked", true).commit();
+        }
+        return sp;
     }
+    private static volatile boolean migrated;
 
     static boolean enabled(Context c) { return p(c).getBoolean("enabled", true); }
     static void setEnabled(Context c, boolean v) { p(c).edit().putBoolean("enabled", v).apply(); }
@@ -67,9 +75,10 @@ final class Prefs {
         else p(c).edit().putString("name_" + udn, name.trim()).apply();
     }
 
-    /** Web settings page (on by default, can be switched off on the TV). */
-    static boolean webEnabled(Context c) { return p(c).getBoolean("web_enabled", true); }
-    static void setWebEnabled(Context c, boolean v) { p(c).edit().putBoolean("web_enabled", v).apply(); }
+    /** Web settings page: off by default; the app asks once on first start (webAsked). */
+    static boolean webEnabled(Context c) { return p(c).getBoolean("web_enabled", false); }
+    static void setWebEnabled(Context c, boolean v) { p(c).edit().putBoolean("web_enabled", v).putBoolean("web_asked", true).commit(); }
+    static boolean webAsked(Context c) { return p(c).getBoolean("web_asked", false); }
 
     /**
      * PIN for the web page (HTTP Basic password). Always set: a random 6-digit PIN is created the

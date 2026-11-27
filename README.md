@@ -86,7 +86,7 @@ The right side of the screen has:
 
 ## Web settings page
 
-The same settings can be changed from any browser on your network, at `http://<tv-ip>:8099`. The TV screen shows the address and a QR code to scan with a phone.
+The same settings can be changed from any browser on your network, at `http://<tv-ip>:8099`. The page is off by default: the app asks once on first start whether to turn it on, and the *Web settings* button switches it later. While it is on, the TV screen shows the address and a QR code to scan with a phone.
 
 The page has:
 

@@ -24,7 +24,7 @@ import java.util.Set;
 
 /**
  * Small HTTP server for changing the bridge's settings from a PC or phone browser on the LAN.
- * On by default (can be switched off on the TV). Protected by a PIN (on by default) via HTTP Basic auth, with a
+ * Off by default; the app asks on first start and the TV can switch it. Protected by a PIN (on by default) via HTTP Basic auth, with a
  * lockout after repeated wrong PINs.
  */
 final class WebServer {
